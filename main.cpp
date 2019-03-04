@@ -1,5 +1,26 @@
 #include <iostream>
+#include <cstdlib>
+#include <string.h>
+#include <fstream>
 #include "tree.h"
+
+void from_file(Tree* t, const char* path){
+	std::ifstream file(path);
+	char c;
+	char token[100];
+	for(int i = 0; i < sizeof(token); i++) token[i] = 0;
+	int position = 0;
+	while(file.get(c)){
+		if(c == ' '){
+			t->insert(atoi(token));
+			position = 0;
+			for(int i = 0; i < sizeof(token); i++) token[i] = 0;
+		}else {
+			token[position] = c;
+			position++;
+		}
+	}
+}
 
 int main(){
 	Tree t = Tree();
@@ -35,7 +56,7 @@ int main(){
 
 					if(strcmp(number, "exit") == 0)
 						break;
-					t.insert(atoi(number), true);
+					t.insert(atoi(number));
 				}
 				delete[] number;
 			}
@@ -44,7 +65,7 @@ int main(){
 		}else if(strcmp(input, "print") == 0){
 			t.print(true);
 		}else if(strcmp(input, "output") == 0){
-			t.print(false);
+			t.print(false); 
 		}else{
 			std::cout << "Not sure what that command is..." << std::endl;
 		}
