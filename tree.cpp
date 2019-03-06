@@ -1,6 +1,16 @@
 #include <iostream>
+#include <cmath>
 #include "tree.h"
+//---- Non member function ---- 
 
+int get_spaces(int depth, int max_depth){
+	depth = max_depth - depth;
+	if (depth == 1)
+		return 1;
+	return pow(2, depth);
+}
+
+//-----------------------------
 Tree::Tree(){
 	size = 0;
 	root = 0;
@@ -26,7 +36,11 @@ void Tree::print_helper(Node* root, int current_depth, int target_depth){
 	if(current_depth > target_depth) //If we're too deep into the tree, return
 		return;
 	if(current_depth == target_depth){ //If this is the right depth, then print out the data of the node
-		std::cout << root->data << " ";
+		int max_depth = get_depth(root, 1) - 1;
+		int num_spaces = get_spaces(current_depth, max_depth) + 1;
+		for(int i = 0; i < num_spaces; i++)
+			std::cout << " ";
+		std::cout << root->data;
 		return;
 	}
 	if(current_depth < target_depth){ //If we need to go deeper
@@ -43,13 +57,10 @@ void Tree::print(bool tree_output){
 		int print_depth = 1; //The current depth of the heap we're printing
 		int width = 1; //Current width of the print depth
 		while(print_depth <= total_depth){ 
+			int bottom_width = pow(2,  print_depth - 1);
+			
 			print_helper(root, 1, print_depth); //Prints out all nodes in the heap at the right depth
 			std::cout << std::endl; 
-			if(print_depth != total_depth){ //If we're not at the bottom of the list print out the right number of '/\'
-				for(int i = 0; i < width; i++)
-					std::cout << "/\\ ";
-				std::cout << std::endl;
-			}
 			width *= 2; //Increase the width of the tree
 			print_depth++; //Increase the print depth
 		}
