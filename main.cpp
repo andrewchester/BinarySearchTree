@@ -21,7 +21,12 @@ void from_file(Tree* t, const char* path){
 		}
 	}
 }
-
+/*
+	
+			20
+	10				30
+5		15		25		35
+*/
 int main(){
 	Tree t = Tree();
 	char* input = new char[10];
