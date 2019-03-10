@@ -6,7 +6,7 @@ class Tree {
 			Node* right;
 			int data;
 		};
-		int size;
+		int size; 
 		Node* root;
 		void sort(Node*);
 		void print_helper(Node*, int current_depth, int target_depth);

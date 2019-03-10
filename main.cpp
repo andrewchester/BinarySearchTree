@@ -4,6 +4,8 @@
 #include <fstream>
 #include "tree.h"
 
+//Takes in numbers from file
+//Format 1 2 3 4 
 void from_file(Tree* t, const char* path){
 	std::ifstream file(path);
 	char c;
@@ -21,12 +23,6 @@ void from_file(Tree* t, const char* path){
 		}
 	}
 }
-/*
-	
-			20
-	10				30
-5		15		25		35
-*/
 int main(){
 	Tree t = Tree();
 	char* input = new char[10];
@@ -71,6 +67,13 @@ int main(){
 			t.print(true);
 		}else if(strcmp(input, "output") == 0){
 			t.print(false); 
+		}else if(strcmp(input, "remove") == 0){
+			std::cout << "Enter number to remove: ";
+			std::cin.get(input, 10);
+			std::cin.clear();
+			std::cin.ignore(100, '\n');
+
+			t.remove(atoi(input));			
 		}else{
 			std::cout << "Not sure what that command is..." << std::endl;
 		}
