@@ -9,13 +9,14 @@ class Tree {
 		int size;
 		Node* root;
 		void sort(Node*);
-		void print_helper(Node*, int current_depth, int target_depth, int inbetween_tabs);
+		void print_helper(Node*, int current_depth, int target_depth);
 		int get_depth(Node*, int);	 
+		Node* find(Node*, int);
+		void siftup(Node*);
 	public: 
 		Tree();
 	
 		void insert(int);
-		Node* search(int);
 		void remove(int);
 		void print(bool);
 };
